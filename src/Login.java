@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-public class Login extends JFrame {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+
+public class Login extends JFrame implements ActionListener {
     JTextField textField;
     JPasswordField jPasswordField;
     JButton b1,b2;
@@ -43,6 +47,7 @@ public class Login extends JFrame {
         b1.setFont(new Font("Tahoma",Font.BOLD,15));
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.white);
+        b1.addActionListener(this);
         add(b1);
         //BUTTON SESH HOISE;
         //BUTTON TWO CANCEL
@@ -51,6 +56,7 @@ public class Login extends JFrame {
         b2.setFont(new Font("Tahoma",Font.BOLD,15));
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.white);
+        b2.addActionListener(this);
         add(b2);
 
         //BUTTON DONE;
@@ -60,7 +66,40 @@ public class Login extends JFrame {
         setLayout(null);
         setVisible(true);
     }
+    @Override
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b1) {
+            try {
+                Conn c = new Conn();
+                String user = textField.getText();
+                String pass = new String(jPasswordField.getPassword());
+
+                // Correct spacing in SQL query
+                String q = "SELECT * FROM Login WHERE ID = '" + user + "' AND PW = '" + pass + "'";
+
+                ResultSet resultset = c.statement.executeQuery(q);
+
+                if (resultset.next()) {
+                    new Test();
+                    setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Username or Password");
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            System.exit(0);
+        }
+    }
+
+
+
     public static void main(String[] args){
         new Login();
     }
+
+
 }
