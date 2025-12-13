@@ -35,12 +35,12 @@ public class Login extends JFrame implements ActionListener {
         jPasswordField.setBackground(new Color(255,179,0));
         add(jPasswordField);
         //pass nebe
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/login.png"));
-        Image i1=imageIcon.getImage().getScaledInstance(500,500,Image.SCALE_DEFAULT);
-        ImageIcon imageIcon1 = new ImageIcon(i1);
-        JLabel label = new JLabel(imageIcon1);
-        label.setBounds(320,-30,400,300);
-        add(label);
+//        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/login.png"));
+//        Image i1=imageIcon.getImage().getScaledInstance(500,500,Image.SCALE_DEFAULT);
+//        ImageIcon imageIcon1 = new ImageIcon(i1);
+//        JLabel label = new JLabel(imageIcon1);
+//        label.setBounds(320,-30,400,300);
+//        add(label);
         //BUTTON ER KAJ.
         b1=new JButton("Login");
         b1.setBounds(40,140,120,30);
@@ -60,6 +60,7 @@ public class Login extends JFrame implements ActionListener {
         add(b2);
 
         //BUTTON DONE;
+        setUndecorated(true);
         getContentPane().setBackground(new Color(109,164,170));
         setSize(750,300);
         setLocation(400,270);
@@ -81,7 +82,7 @@ public class Login extends JFrame implements ActionListener {
                 ResultSet resultset = c.statement.executeQuery(q);
 
                 if (resultset.next()) {
-                    new Test();
+                    new Reception();
                     setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Username or Password");
